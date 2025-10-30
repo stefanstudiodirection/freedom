@@ -23,7 +23,10 @@ export const TransferConfirmed: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white max-w-[480px] mx-auto flex flex-col items-center justify-center px-4">
+  <div className="min-h-screen bg-black text-white max-w-[480px] mx-auto flex flex-col px-4">
+    
+    {/* Centered Content */}
+    <div className="flex-1 flex flex-col items-center justify-center">
       {/* Success Icon */}
       <div className="mb-8">
         <div className="w-24 h-24 bg-[#A488F5] rounded-2xl flex items-center justify-center">
@@ -38,24 +41,23 @@ export const TransferConfirmed: React.FC = () => {
         Transfer Confirmed!
       </h1>
 
-      <p className="text-base text-[#716860] text-center max-w-sm leading-relaxed mb-12">
+      <p className="text-base text-[#716860] text-center max-w-sm leading-relaxed">
         You have successfully transferred £{amount.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} to your {destination.name} account. The funds are now available.
       </p>
-
-      {/* Spacer */}
-      <div className="flex-1"></div>
-
-      {/* Back to Home Button */}
-      <div className="w-full max-w-sm mt-auto mb-8">
-        <Button 
-          onClick={handleBackToHome}
-          className="w-full h-14 bg-[#A488F5] hover:bg-[#9575e8] text-black font-medium text-base rounded-xl"
-        >
-          Back to home
-        </Button>
-      </div>
     </div>
-  );
+
+    {/* Back to Home Button - Pinned to bottom */}
+    <div className="w-full mb-8">
+      <Button 
+        onClick={handleBackToHome}
+        className="w-full h-14 bg-[#A488F5] hover:bg-[#9575e8] text-black font-medium text-base rounded-xl"
+      >
+        Back to home
+      </Button>
+    </div>
+    
+  </div>
+);
 };
 
 export default TransferConfirmed;
