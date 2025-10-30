@@ -41,8 +41,8 @@ export const AccountCard: React.FC<AccountCardProps> = ({
   };
 
   const handlePrimaryAction = () => {
-    if (type === 'pension') {
-      navigate('/pension-warning');
+    if (type === 'current') {
+      navigate('/account/currentAccount');
     } else if (type === 'savings') {
       navigate('/move-funds', { 
         state: { 
@@ -50,11 +50,18 @@ export const AccountCard: React.FC<AccountCardProps> = ({
           destinationAccount: 'currentAccount' 
         } 
       });
-    } else if (type === 'current') {
-      // Current account cannot transfer out - do nothing or show message
-      return;
-    } else {
-      setIsExpanded(!isExpanded);
+    } else if (type === 'pension') {
+      const hidePensionWarning = localStorage.getItem('hidePensionWarning');
+      if (hidePensionWarning === 'true') {
+        navigate('/move-funds', { 
+          state: { 
+            sourceAccount: 'pension', 
+            destinationAccount: 'savings' 
+          } 
+        });
+      } else {
+        navigate('/pension-warning');
+      }
     }
   };
 
