@@ -56,7 +56,7 @@ export const HomeDark: React.FC = () => {
               title="Current Account"
               subtitle="Funds available to spend"
               amount={formatBalance(accounts.currentAccount.balance)}
-              primaryAction="Move funds"
+              primaryAction="Card details"
               primaryIcon="https://api.builder.io/api/v1/image/assets/TEMP/0d7398014e84f6d0301446900b81b658bf87b703?placeholderIfAbsent=true"
               secondaryIcon="https://api.builder.io/api/v1/image/assets/TEMP/1a679bd7b3be1f0055ae6f39f41097bff967e2f1?placeholderIfAbsent=true"
             />
