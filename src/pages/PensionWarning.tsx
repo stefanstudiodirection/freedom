@@ -28,7 +28,7 @@ export const PensionWarning: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white max-w-[480px] mx-auto flex flex-col">
-      <StatusBar />
+      {/* <StatusBar /> */}
       
       <div className="px-4 py-6 flex flex-col flex-1">
         {/* Header */}
