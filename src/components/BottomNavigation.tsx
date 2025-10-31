@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Home, ArrowUpDown, BookOpen, User } from "lucide-react";
+import { Home, ArrowUpDown, BookOpen, User, ChartPieIcon } from "lucide-react";
 
 interface NavItem {
   id: string;
@@ -27,6 +27,12 @@ const navItems: NavItem[] = [
     label: "Learn",
     path: "/learn",
     icon: <BookOpen className="w-6 h-6" />,
+  },
+  {
+    id: "budgeting",
+    label: "Budgeting",
+    path: "/",
+    icon: <ChartPieIcon className="w-6 h-6" />,
   },
   {
     id: "profile",
