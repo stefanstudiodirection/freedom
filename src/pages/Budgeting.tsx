@@ -10,7 +10,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
+import {
+  ChartContainer,
+  ChartConfig,
+} from "@/components/ui/chart";
+import { PieChart, Pie, Cell, Label } from "recharts";
 
 interface BudgetCategory {
   id: string;
@@ -126,36 +130,22 @@ const Budgeting: React.FC = () => {
     .sort((a, b) => b.date.getTime() - a.date.getTime())
     .slice(0, 5);
 
-  // Prepare chart data
-  const chartData = currentCategories.map(cat => ({
-    name: cat.name,
-    value: cat.spent,
-    color: cat.color
+  // Prepare chart data and config
+  const chartData = currentCategories.map((cat, index) => ({
+    category: cat.name,
+    amount: cat.spent,
+    fill: cat.color
   }));
 
   const totalSpent = currentCategories.reduce((sum, cat) => sum + cat.spent, 0);
 
-  const CustomLegend = (props: any) => {
-    const { payload } = props;
-    return (
-      <div className="flex flex-col gap-2 mt-4">
-        {payload.map((entry: any, index: number) => (
-          <div key={`legend-${index}`} className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div 
-                className="w-3 h-3 rounded-full" 
-                style={{ backgroundColor: entry.color }}
-              />
-              <span className="text-sm text-foreground">{entry.value}</span>
-            </div>
-            <span className="text-sm font-medium text-foreground">
-              {formatCurrency(entry.payload.value)}
-            </span>
-          </div>
-        ))}
-      </div>
-    );
-  };
+  const chartConfig: ChartConfig = currentCategories.reduce((config, cat) => {
+    config[cat.id] = {
+      label: cat.name,
+      color: cat.color
+    };
+    return config;
+  }, {} as ChartConfig);
 
   return (
     <div className="min-h-screen bg-[#F3F3F3] dark:bg-black text-foreground max-w-[480px] mx-auto flex flex-col pb-[100px]">
@@ -284,46 +274,65 @@ const Budgeting: React.FC = () => {
         {/* Chart Section */}
         <div className="bg-white dark:bg-[#211E1E] rounded-xl p-6 border border-border mb-6">
           <h2 className="text-lg font-semibold text-foreground mb-4">Saving by category</h2>
-          <ResponsiveContainer width="100%" height={240}>
+          <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
             <PieChart>
               <Pie
                 data={chartData}
-                cx="50%"
-                cy="50%"
+                dataKey="amount"
+                nameKey="category"
                 innerRadius={60}
-                outerRadius={80}
-                paddingAngle={5}
-                dataKey="value"
+                strokeWidth={5}
               >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
+                <Label
+                  content={({ viewBox }) => {
+                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                      return (
+                        <text
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                        >
+                          <tspan
+                            x={viewBox.cx}
+                            y={viewBox.cy}
+                            className="fill-muted-foreground text-xs"
+                          >
+                            Total
+                          </tspan>
+                          <tspan
+                            x={viewBox.cx}
+                            y={(viewBox.cy || 0) + 20}
+                            className="fill-foreground text-lg font-semibold"
+                          >
+                            {formatCurrency(totalSpent)}
+                          </tspan>
+                        </text>
+                      );
+                    }
+                  }}
+                />
               </Pie>
-              <text 
-                x="50%" 
-                y="45%" 
-                textAnchor="middle" 
-                dominantBaseline="middle"
-                className="text-xs fill-muted-foreground"
-              >
-                Total
-              </text>
-              <text 
-                x="50%" 
-                y="55%" 
-                textAnchor="middle" 
-                dominantBaseline="middle"
-                className="text-lg font-semibold fill-foreground"
-              >
-                {formatCurrency(totalSpent)}
-              </text>
             </PieChart>
-          </ResponsiveContainer>
-          <CustomLegend payload={chartData.map((item, index) => ({
-            value: item.name,
-            color: item.color,
-            payload: item
-          }))} />
+          </ChartContainer>
+          
+          {/* Legend */}
+          <div className="flex flex-col gap-2 mt-4">
+            {currentCategories.map((cat) => (
+              <div key={cat.id} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div 
+                    className="w-3 h-3 rounded-full" 
+                    style={{ backgroundColor: cat.color }}
+                  />
+                  <span className="text-sm text-foreground">{cat.name}</span>
+                </div>
+                <span className="text-sm font-medium text-foreground">
+                  {formatCurrency(cat.spent)}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Transactions Section */}
