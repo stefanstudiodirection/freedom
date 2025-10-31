@@ -30,11 +30,11 @@ const Transactions: React.FC = () => {
   const getTransactionIcon = (type: string) => {
     switch (type) {
       case "withdrawal":
-        return <ArrowDown className="w-5 h-5 text-white" />;
+        return <ArrowDown className="w-5 h-5 text-[#211E1E] dark:text-white" />;
       case "topup":
-        return <ArrowUp className="w-5 h-5 text-white" />;
+        return <ArrowUp className="w-5 h-5 text-[#211E1E] dark:text-white" />;
       case "transfer":
-        return <ArrowRightLeft className="w-5 h-5 text-white" />;
+        return <ArrowRightLeft className="w-5 h-5 text-[#211E1E] dark:text-white" />;
       default:
         return null;
     }
@@ -54,7 +54,7 @@ const Transactions: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pb-24">
+    <div className="min-h-screen bg-[#F3F3F3] dark:bg-black text-foreground pb-24">
       {/* Status Bar */}
 
       {/* Header */}
@@ -62,10 +62,10 @@ const Transactions: React.FC = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-[28px] font-semibold">Transactions</h1>
           <div className="flex gap-3">
-            <button className="w-10 h-10 rounded-full bg-[#1C1C1E] flex items-center justify-center">
+            <button className="w-10 h-10 rounded-full bg-white dark:bg-[#1C1C1E] flex items-center justify-center">
               <Search className="w-5 h-5" />
             </button>
-            <button className="w-10 h-10 rounded-full bg-[#1C1C1E] flex items-center justify-center">
+            <button className="w-10 h-10 rounded-full bg-white dark:bg-[#1C1C1E] flex items-center justify-center">
               <SlidersHorizontal className="w-5 h-5" />
             </button>
           </div>
@@ -81,7 +81,7 @@ const Transactions: React.FC = () => {
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               selectedAccount === account
                 ? "bg-[#A488F5] text-white"
-                : "bg-[#1C1C1E] text-white"
+                : "bg-white dark:bg-[#1C1C1E] text-foreground"
             }`}
           >
             {accountLabels[account]}
@@ -94,14 +94,14 @@ const Transactions: React.FC = () => {
         {filteredTransactions.map((transaction) => (
           <div
             key={transaction.id}
-            className="flex items-center gap-4 py-4 border-b border-[#2C2C2E] cursor-pointer hover:bg-[#1C1C1E]/30 transition-colors"
+            className="flex items-center gap-4 py-4 border-b border-[#E5E5EA] dark:border-[#2C2C2E] cursor-pointer hover:bg-[#E5E5EA] dark:hover:bg-[#1C1C1E]/30 transition-colors"
             onClick={() => {/* Could navigate to transaction detail */}}
           >
-            <div className="w-12 h-12 rounded-lg bg-[#2C2C2E] flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-lg bg-[#F3F3F3] dark:bg-[#2C2C2E] flex items-center justify-center flex-shrink-0">
               {getTransactionIcon(transaction.type)}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-white text-base font-medium">
+              <div className="text-foreground text-base font-medium">
                 {getTransactionLabel(transaction.type)}
               </div>
               <div className="text-[#8E8E93] text-sm">
@@ -110,7 +110,7 @@ const Transactions: React.FC = () => {
             </div>
             <div
               className={`text-lg font-semibold ${
-                transaction.amount >= 0 ? "text-[#34C759]" : "text-white"
+                transaction.amount >= 0 ? "text-[#34C759]" : "text-foreground"
               }`}
             >
               {transaction.amount >= 0 ? "+ " : "- "}£{" "}
