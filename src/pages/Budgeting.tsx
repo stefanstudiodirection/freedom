@@ -252,7 +252,7 @@ const Budgeting: React.FC = () => {
                   
                   <Progress 
                     value={percentage} 
-                    className="mb-2 h-2"
+                    className="mb-2 h-1"
                     style={{
                       ['--progress-background' as any]: category.color,
                       backgroundColor: '#D9D9D9' 
