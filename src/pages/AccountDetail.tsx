@@ -139,6 +139,11 @@ const AccountDetail: React.FC = () => {
           <div className="mb-4 text-sm opacity-80">{config.subtitle}</div>
           <div className="rounded-lg bg-[#211E1E] flex items-center justify-between px-4 py-3 mb-4">
             <div className="flex items-center gap-2">{/* TODO: Icon if needed */}
+              <div className="w-10 h-10 flex items-center justify-center bg-[#000] rounded-[4px]"
+              style={{ color: account.color }}
+              >
+              <span className="text-2xl">{account.icon}</span>
+            </div>
               <span className="font-medium">Balance</span>
             </div>
             <div className="text-lg ml-2 font-semibold">{formatCurrency(account.balance)}</div>
