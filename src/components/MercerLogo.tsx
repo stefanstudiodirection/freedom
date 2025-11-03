@@ -1,12 +1,17 @@
-export const MercerLogo = ({ className = "" }: { className?: string; style?: React.CSSProperties; }) => (
+export const MercerLogo = ({ 
+	className = "", 
+	style 
+}: { className?: string; style?: React.CSSProperties }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="58"
 		height="16"
 		viewBox="0 0 58 16"
 		fill="none"
+		className={className}
+		style={style}
 	>
-		<g clip-path="url(#clip0_1071_1422)">
+		<g clipPath="url(#clip0_1071_1422)">
 			<path
 				d="M11.6653 0.254141L0.305908 4.38184L4.44039 15.7226L15.7998 11.5949L11.6653 0.254141Z"
 				fill="currentColor"
