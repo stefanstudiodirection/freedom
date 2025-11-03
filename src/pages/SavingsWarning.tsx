@@ -48,8 +48,7 @@ export const SavingsWarning: React.FC = () => {
 
 				{/* Warning Icon */}
 				<div className="flex justify-center mb-6">
-					<div className="w-20 h-20 bg-white dark:bg-[#211E1E] border border-border rounded-2xl flex items-center justify-center">
-						<div className="w-12 h-12 bg-[#A488F5] rounded-lg flex items-center justify-center">
+						<div className="w-20 h-20 bg-[#A488F5] rounded-lg flex items-center justify-center">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="40"
@@ -63,7 +62,6 @@ export const SavingsWarning: React.FC = () => {
 								/>
 							</svg>
 						</div>
-					</div>
 				</div>
 
 				{/* Main Heading */}
