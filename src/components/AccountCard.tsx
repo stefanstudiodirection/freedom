@@ -87,7 +87,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({
       </div>
 
       {/* Bottom section: Only for Current Account */}
-      {type === 'current' && (
+      {type === 'pension' && (
         <div className="flex justify-between items-center mt-3 pt-3 border-t border-[#211E1E]/10">
           <span className="text-sm text-[#211E1E]">Funds available to spend</span>
           <button 
