@@ -12,6 +12,11 @@ import {
 	ArrowDown,
 	ArrowUp,
 	ArrowRightLeft,
+	TrendingUp,
+	CreditCard,
+	Target,
+	Bell,
+	HelpCircle,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -24,6 +29,7 @@ import {
 import { ChartContainer, ChartConfig } from "@/components/ui/chart";
 import { PieChart, Pie, Cell, Label } from "recharts";
 import { BottomNavigation } from "@/components/BottomNavigation";
+import { AccountActions } from "@/components/AccountActions";
 
 interface BudgetCategory {
 	id: string;
@@ -94,6 +100,52 @@ function formatCurrency(value: number) {
 		maximumFractionDigits: 2,
 	})}`;
 }
+
+const savingsActions = [
+	{
+		label: "Trends",
+		icon: <TrendingUp />,
+	},
+	{
+		label: "Spending",
+		icon: <CreditCard />,
+	},
+	{
+		label: "Goals",
+		icon: <Target />,
+	},
+	{
+		label: "Notifications",
+		icon: <Bell />,
+	},
+	{
+		label: "Help",
+		icon: <HelpCircle />,
+	},
+];
+
+const currentAccountActions = [
+	{
+		label: "Trends",
+		icon: <TrendingUp />,
+	},
+	{
+		label: "Spending",
+		icon: <CreditCard />,
+	},
+	{
+		label: "Goals",
+		icon: <Target />,
+	},
+	{
+		label: "Notifications",
+		icon: <Bell />,
+	},
+	{
+		label: "Help",
+		icon: <HelpCircle />,
+	},
+];
 
 function formatDate(date: Date) {
 	const d = new Date(date);
@@ -253,10 +305,21 @@ const Budgeting: React.FC = () => {
 								</div>
 							</div>
 						</SelectItem>
-					</SelectContent>
-				</Select>
+			</SelectContent>
+		</Select>
 
-				{/* Categories Section */}
+		{/* Actions Section */}
+		<div className="mb-6">
+			<AccountActions
+				actions={
+					selectedAccount === "savings"
+						? savingsActions
+						: currentAccountActions
+				}
+			/>
+		</div>
+
+		{/* Categories Section */}
 				<div className="mb-6">
 					<div className="flex items-center justify-between mb-4">
 						<h2 className="text-lg font-semibold text-foreground">
