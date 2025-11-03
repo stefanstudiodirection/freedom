@@ -1,4 +1,4 @@
-export const MercerLogo = ({ className = "" }: { className?: string }) => (
+export const MercerLogo = ({ className = "" }: { className?: string; style?: React.CSSProperties; }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width="58"

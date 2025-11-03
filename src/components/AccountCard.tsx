@@ -69,7 +69,11 @@ export const AccountCard: React.FC<AccountCardProps> = ({
 		>
 			{/* Top section: Logo | Balance */}
 			<div className="flex justify-between items-start mb-1">
-				<MercerLogo className={getTextColor()} />
+				<MercerLogo
+					className={getTextColor()}
+					style={{ color: type === "pension" ? "#FFFFFF" : "#211E1E" }}
+				/>
+
 				<div
 					className={`text-[20px] ${getTextColor()} font-normal leading-none tracking-[0.55px]`}
 				>
