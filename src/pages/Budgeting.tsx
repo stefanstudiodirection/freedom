@@ -542,7 +542,7 @@ const Budgeting: React.FC = () => {
 							return (
 								<div
 									key={category.id}
-									className="min-w-[280px] bg-white dark:bg-[#211E1E] rounded-md p-4"
+									className="min-w-[280px] bg-white dark:bg-[#211E1E] rounded-lg p-4"
 								>
 									<div className="flex items-start justify-between mb-3">
 										<div className="flex items-center gap-3">
@@ -590,7 +590,7 @@ const Budgeting: React.FC = () => {
 				</div>
 
 				{/* Chart Section */}
-				<div className="bg-white dark:bg-[#211E1E] rounded-md p-6 mb-6">
+				<div className="bg-white dark:bg-[#211E1E] rounded-lg p-6 mb-6">
 					<h2 className="text-lg font-semibold text-foreground mb-4">
 						Saving by category
 					</h2>
