@@ -178,17 +178,22 @@ function getTransactionLabel(type: string) {
 	}
 }
 
-function getMoveFundsButtonStyles(accountId: AccountType, accountColor: string) {
+function getMoveFundsButtonStyles(
+	accountId: AccountType,
+	accountColor: string
+) {
 	if (accountId === "pension") {
 		return {
-			className: "w-full py-4 rounded-lg mb-4 font-regular text-base flex items-center justify-center gap-2 bg-[#211E1E] text-white dark:bg-white dark:text-black",
-			style: {}
+			className:
+				"w-full py-4 rounded-lg mb-4 font-regular text-base flex items-center justify-center gap-2 bg-[#211E1E] text-white dark:bg-white dark:text-black",
+			style: {},
 		};
 	}
-	
+
 	return {
-		className: "w-full py-4 rounded-lg mb-4 font-regular text-white text-base flex items-center justify-center gap-2",
-		style: { backgroundColor: accountColor }
+		className:
+			"w-full py-4 rounded-lg mb-4 font-regular text-white text-base flex items-center justify-center gap-2",
+		style: { backgroundColor: accountColor },
 	};
 }
 
@@ -208,11 +213,31 @@ const AccountDetail: React.FC = () => {
 		.filter((t) => t.account === accountId)
 		.sort((a, b) => b.date.getTime() - a.date.getTime());
 
+	// const handleMoveFunds = () => {
+	// 	let destinationAccount: AccountType;
+
+	// 	if (accountId === "pension") {
+	// 		destinationAccount = "savings";
+	// 	} else if (accountId === "savings") {
+	// 		destinationAccount = "currentAccount";
+	// 	} else {
+	// 		return;
+	// 	}
+
+	// 	navigate("/move-funds", {
+	// 		state: {
+	// 			sourceAccount: accountId,
+	// 			destinationAccount,
+	// 		},
+	// 	});
+	// };
 	const handleMoveFunds = () => {
 		let destinationAccount: AccountType;
 
+		// Ako je izvor pension, prvo prikaži upozorenje
 		if (accountId === "pension") {
-			destinationAccount = "savings";
+			navigate("/pension-warning");
+			return;
 		} else if (accountId === "savings") {
 			destinationAccount = "currentAccount";
 		} else {
@@ -230,7 +255,10 @@ const AccountDetail: React.FC = () => {
 	return (
 		<div className="min-h-screen bg-[#F3F3F3] dark:bg-black text-foreground max-w-[480px] mx-auto flex flex-col">
 			<div className="px-4 py-6 flex flex-col flex-1">
-				<button className="mb-4 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black" onClick={() => navigate("/")}>
+				<button
+					className="mb-4 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black"
+					onClick={() => navigate("/")}
+				>
 					<ArrowLeft className="w-6 h-6" />
 				</button>
 				<div>
@@ -269,30 +297,34 @@ const AccountDetail: React.FC = () => {
 							<AccountActions actions={config.actions} />
 						</div>
 					)}
-				{config.moveFundsButton && (() => {
-					const buttonStyles = getMoveFundsButtonStyles(accountId, account.color);
-					return (
-						<button
-							onClick={handleMoveFunds}
-							className={buttonStyles.className}
-							style={buttonStyles.style}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="20"
-								height="20"
-								viewBox="0 0 20 20"
-								fill="none"
-							>
-								<path
-									d="M3.30806 6.69268C3.24995 6.63463 3.20385 6.5657 3.1724 6.48983C3.14095 6.41396 3.12476 6.33263 3.12476 6.25049C3.12476 6.16836 3.14095 6.08703 3.1724 6.01115C3.20385 5.93528 3.24995 5.86635 3.30806 5.8083L5.80806 3.3083C5.89547 3.2208 6.00688 3.16119 6.12818 3.13704C6.24948 3.11288 6.37523 3.12526 6.48949 3.1726C6.60376 3.21995 6.7014 3.30013 6.77007 3.403C6.83874 3.50587 6.87535 3.62681 6.87525 3.75049V5.62549H16.2502C16.416 5.62549 16.575 5.69134 16.6922 5.80855C16.8094 5.92576 16.8752 6.08473 16.8752 6.25049C16.8752 6.41625 16.8094 6.57522 16.6922 6.69243C16.575 6.80964 16.416 6.87549 16.2502 6.87549H6.87525V8.75049C6.87535 8.87418 6.83874 8.99511 6.77007 9.09798C6.7014 9.20085 6.60376 9.28104 6.48949 9.32838C6.37523 9.37573 6.24948 9.3881 6.12818 9.36395C6.00688 9.33979 5.89547 9.28019 5.80806 9.19268L3.30806 6.69268ZM16.6924 13.3083L14.1924 10.8083C14.105 10.7208 13.9936 10.6612 13.8723 10.637C13.751 10.6129 13.6253 10.6253 13.511 10.6726C13.3967 10.7199 13.2991 10.8001 13.2304 10.903C13.1618 11.0059 13.1252 11.1268 13.1252 11.2505V13.1255H3.75025C3.58449 13.1255 3.42552 13.1913 3.30831 13.3085C3.1911 13.4258 3.12525 13.5847 3.12525 13.7505C3.12525 13.9163 3.1911 14.0752 3.30831 14.1924C3.42552 14.3096 3.58449 14.3755 3.75025 14.3755H13.1252V16.2505C13.1252 16.3742 13.1618 16.4951 13.2304 16.598C13.2991 16.7009 13.3967 16.781 13.511 16.8284C13.6253 16.8757 13.751 16.8881 13.8723 16.8639C13.9936 16.8398 14.105 16.7802 14.1924 16.6927L16.6924 14.1927C16.7505 14.1346 16.7966 14.0657 16.8281 13.9898C16.8596 13.914 16.8757 13.8326 16.8757 13.7505C16.8757 13.6684 16.8596 13.587 16.8281 13.5112C16.7966 13.4353 16.7505 13.3664 16.6924 13.3083Z"
-									fill="currentColor"
-								/>
-							</svg>
-							<span>Move funds</span>
-						</button>
-					);
-				})()}
+					{config.moveFundsButton &&
+						(() => {
+							const buttonStyles = getMoveFundsButtonStyles(
+								accountId,
+								account.color
+							);
+							return (
+								<button
+									onClick={handleMoveFunds}
+									className={buttonStyles.className}
+									style={buttonStyles.style}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="20"
+										height="20"
+										viewBox="0 0 20 20"
+										fill="none"
+									>
+										<path
+											d="M3.30806 6.69268C3.24995 6.63463 3.20385 6.5657 3.1724 6.48983C3.14095 6.41396 3.12476 6.33263 3.12476 6.25049C3.12476 6.16836 3.14095 6.08703 3.1724 6.01115C3.20385 5.93528 3.24995 5.86635 3.30806 5.8083L5.80806 3.3083C5.89547 3.2208 6.00688 3.16119 6.12818 3.13704C6.24948 3.11288 6.37523 3.12526 6.48949 3.1726C6.60376 3.21995 6.7014 3.30013 6.77007 3.403C6.83874 3.50587 6.87535 3.62681 6.87525 3.75049V5.62549H16.2502C16.416 5.62549 16.575 5.69134 16.6922 5.80855C16.8094 5.92576 16.8752 6.08473 16.8752 6.25049C16.8752 6.41625 16.8094 6.57522 16.6922 6.69243C16.575 6.80964 16.416 6.87549 16.2502 6.87549H6.87525V8.75049C6.87535 8.87418 6.83874 8.99511 6.77007 9.09798C6.7014 9.20085 6.60376 9.28104 6.48949 9.32838C6.37523 9.37573 6.24948 9.3881 6.12818 9.36395C6.00688 9.33979 5.89547 9.28019 5.80806 9.19268L3.30806 6.69268ZM16.6924 13.3083L14.1924 10.8083C14.105 10.7208 13.9936 10.6612 13.8723 10.637C13.751 10.6129 13.6253 10.6253 13.511 10.6726C13.3967 10.7199 13.2991 10.8001 13.2304 10.903C13.1618 11.0059 13.1252 11.1268 13.1252 11.2505V13.1255H3.75025C3.58449 13.1255 3.42552 13.1913 3.30831 13.3085C3.1911 13.4258 3.12525 13.5847 3.12525 13.7505C3.12525 13.9163 3.1911 14.0752 3.30831 14.1924C3.42552 14.3096 3.58449 14.3755 3.75025 14.3755H13.1252V16.2505C13.1252 16.3742 13.1618 16.4951 13.2304 16.598C13.2991 16.7009 13.3967 16.781 13.511 16.8284C13.6253 16.8757 13.751 16.8881 13.8723 16.8639C13.9936 16.8398 14.105 16.7802 14.1924 16.6927L16.6924 14.1927C16.7505 14.1346 16.7966 14.0657 16.8281 13.9898C16.8596 13.914 16.8757 13.8326 16.8757 13.7505C16.8757 13.6684 16.8596 13.587 16.8281 13.5112C16.7966 13.4353 16.7505 13.3664 16.6924 13.3083Z"
+											fill="currentColor"
+										/>
+									</svg>
+									<span>Move funds</span>
+								</button>
+							);
+						})()}
 					{/* TRANSACTIONS */}
 					<div className="mt-6">
 						<div className="flex items-center justify-between mb-4">
