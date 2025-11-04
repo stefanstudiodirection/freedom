@@ -44,6 +44,7 @@ export const HomeDark: React.FC = () => {
 	const navigate = useNavigate();
 	const accountsSectionRef = useRef<HTMLElement>(null);
 	const headerRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
 
 	useAccountCardsStagger(accountsSectionRef);
 
@@ -58,6 +59,25 @@ export const HomeDark: React.FC = () => {
 			{
 				y: "0%",
 				duration: 1,
+				ease: "power2.out",
+        delay: 0.3, // Počinje nakon main animacije
+			}
+		);
+	}, []);
+
+  useGSAP(() => {
+		if (!mainRef.current) return;
+
+		gsap.fromTo(
+			mainRef.current,
+			{
+				y: 50,
+				opacity: 0,
+			},
+			{
+				y: 0,
+				opacity: 1,
+				duration: 0.6,
 				ease: "power2.out",
 			}
 		);
@@ -115,7 +135,7 @@ export const HomeDark: React.FC = () => {
 					<Header />
 				</div>
 
-				<main className="w-full mt-4 px-4">
+				<main ref={mainRef} className="w-full mt-4 px-4">
 					<section
 						ref={accountsSectionRef}
 						aria-label="Account overview"
