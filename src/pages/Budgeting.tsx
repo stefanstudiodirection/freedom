@@ -517,7 +517,10 @@ const Budgeting: React.FC = () => {
 				</Select>
 
 				{/* Actions Section */}
-				<div className="mb-6">
+				<div className="mb-6 mt-2">
+          <h2 className="text-lg font-normal text-foreground mb-4">
+							Actions
+					</h2>
 					<AccountActions
 						actions={
 							selectedAccount === "savings"
