@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { StatusBar } from "./StatusBar";
 import { Header } from "./Header";
 import { AccountCard } from "./AccountCard";
@@ -11,6 +11,7 @@ import { useAccounts } from "@/contexts/AccountContext";
 import { useNavigate } from 'react-router-dom';
 import { currentAccountActions } from "@/pages/AccountDetail";
 import { ArrowRight } from 'lucide-react';
+import { useAccountCardsStagger } from "@/hooks/useAccountCardsStagger";
 
 const mockArticles = [
   {
@@ -39,6 +40,9 @@ export const HomeDark: React.FC = () => {
   const [showAllPromotions, setShowAllPromotions] = useState(false);
   const { accounts } = useAccounts();
   const navigate = useNavigate();
+  const accountsSectionRef = useRef<HTMLElement>(null);
+  
+  useAccountCardsStagger(accountsSectionRef);
 
   const formatBalance = (balance: number) => {
     const parts = balance.toLocaleString('en-GB', { 
@@ -87,7 +91,7 @@ export const HomeDark: React.FC = () => {
         <Header />
 
         <main className="w-full mt-4 px-4">
-          <section aria-label="Account overview" className="w-full">
+          <section ref={accountsSectionRef} aria-label="Account overview" className="w-full">
             <div className="mb-[-32px]">
               <AccountCard
                 type="pension"

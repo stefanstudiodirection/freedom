@@ -69,7 +69,7 @@ export const AccountCard: React.FC<AccountCardProps> = ({
 			}}
 			role="button"
 			tabIndex={0}
-			className={`w-full ${getBackgroundColor()} ${getPaddingClass()} ${getZIndex()} rounded-[9px] cursor-pointer transition-opacity relative`}
+			className={`account-card w-full ${getBackgroundColor()} ${getPaddingClass()} ${getZIndex()} rounded-[9px] cursor-pointer transition-opacity relative will-change-[transform,opacity]`}
 		>
 			<div className="flex justify-between items-center">
 				<div className="">
