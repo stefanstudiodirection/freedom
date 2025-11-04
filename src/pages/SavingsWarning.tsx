@@ -74,8 +74,9 @@ export const SavingsWarning: React.FC = () => {
 				{/* Important Information Section */}
 				<div className="">
 					<h3 className="text-base font-normal text-center text-[#716860]">
-						You're moving £2,500 from your high-interest 
-            savings to your spending account.
+						You're moving £2,500 from your high-
+            <br />
+            interest savings to your spending account.
 					</h3>
 
           <div className="w-full h-px mt-8 mb-8" style={{ background: 'rgba(33, 30, 30, 0.15)' }}/>
