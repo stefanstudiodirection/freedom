@@ -23,18 +23,18 @@ const mockArticles = [
 	},
 	{
 		id: "2",
-		title: "5 Questions to Ask Before Accessing Your Pension Early",
+		title: "Questions to ask about dawing down",
 		image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600",
 	},
 	{
 		id: "3",
 		title: "The Secret to Growing Your Retirement Fund",
-		image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600",
+		image: "/content-hub/woman-with-smile.webp",
 	},
 	{
 		id: "4",
-		title: "Should I Use My Pension for the...",
-		image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600",
+		title: "Should I Really Touch My Pension? A Guide for the Under-55s",
+		image: "/content-hub/man-smiling.webp",
 	},
 ];
 
